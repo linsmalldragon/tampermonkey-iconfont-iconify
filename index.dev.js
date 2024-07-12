@@ -5,9 +5,9 @@
 // @author       yee.wang
 // @include      https://*.iconfont.cn/*
 // @require      http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js
-// @updateURL    https://github.com/yee94/tampermonkey-iconfont-iconify/raw/main/index.user.js
-// @downloadURL  https://github.com/yee94/tampermonkey-iconfont-iconify/raw/main/index.user.js
-// @require  	 file:///Users/yee.wang/Code/libs/tampermonkey/iconfont-react/dist/main.js
+// @updateURL    https://github.com/linsmalldragon/tampermonkey-iconfont-iconify/raw/main/index.user.js
+// @downloadURL  https://github.com/linsmalldragon/tampermonkey-iconfont-iconify/raw/main/index.user.js
+// @require  	 file:///~/Documents/project/tampermonkey/iconfont-react/dist/main.js
 // @grant        unsafeWindow
 // @connect      *
 // ==/UserScript==
