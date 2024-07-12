@@ -184,5 +184,11 @@ function makeIconifyJson(prefix, icons) {
     icons,
     width: 1024,
     height: 1024,
+    "info": {
+		"name": prefix,
+		"total": icons.length,
+		"samples": Object.keys(icons.length)slice(0, 3),
+		"category": "Custom"
+	},
   };
 }
