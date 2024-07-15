@@ -17294,18 +17294,21 @@
             `/api/project/detail.json?pid=${projectId}`
           ).then((res2) => res2.json());
           const { icons, project } = res.data;
-          const iconifyJson = makeIconifyJson(
-            project.name,
-            icons.reduce((obj, item) => {
-              const svg = new SVG(item.show_svg);
-              return Object.assign(obj, {
-                [toKebabCase(item.name)]: {
-                  body: svg.getBody(),
-                  ...svg.viewBox
-                }
-              });
-            }, {})
-          );
+          const result = await icons.reduce(async (obj, item) => {
+            const accumObj = await obj;
+            console.log(accumObj);
+            const svg = new SVG(item.show_svg);
+            await parseColors(svg, {
+              defaultColor: "currentColor"
+            });
+            return Object.assign(accumObj, {
+              [toKebabCase(item.name)]: {
+                body: svg.getBody(),
+                ...svg.viewBox
+              }
+            });
+          }, Promise.resolve({}));
+          const iconifyJson = makeIconifyJson(project.name, result);
           console.log("\u{1F680} #### ~ iconifyJson", iconifyJson);
           downloadFile("iconify.json", JSON.stringify(iconifyJson, null, 2));
         };

@@ -66,19 +66,23 @@ window.iconfontRunMain = async () => {
           `/api/project/detail.json?pid=${projectId}`
         ).then((res) => res.json());
         const { icons, project } = res.data;
-
-        const iconifyJson = makeIconifyJson(
-          project.name,
-          icons.reduce((obj, item) => {
+        const result = await icons.reduce(async (obj, item) => {
+            const accumObj=await obj;
+            console.log(accumObj)
             const svg = new SVG(item.show_svg);
-            return Object.assign(obj, {
+            // Add 'currentColor' to shapes that use default color
+            await parseColors(svg, {
+              defaultColor: 'currentColor',
+            });
+            return Object.assign(accumObj, {
               [toKebabCase(item.name)]: {
                 body: svg.getBody(),
                 ...svg.viewBox,
               },
             });
-          }, {})
-        );
+        }, Promise.resolve({}));
+       
+        const iconifyJson = makeIconifyJson(project.name,result);
 
         console.log("🚀 #### ~ iconifyJson", iconifyJson);
 
